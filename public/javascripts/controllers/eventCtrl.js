@@ -13,6 +13,7 @@ travelpalApp.controller('eventCtrl', ['$scope', '$routeParams', 'angularFire', '
 
     angularFire(firebaseRef.event($scope.eventId), $scope, 'event').then(function() {
       eventReady = true;
+      $('.main-container').css('opacity', '1');
       angularFire(firebaseRef.travel($scope.event.travel), $scope, 'travel');
       gMapFact.init($scope.event.location, function(){
         gMapFact.addMarker($scope.event.location, $scope.event.description);
@@ -45,6 +46,9 @@ travelpalApp.controller('eventCtrl', ['$scope', '$routeParams', 'angularFire', '
       $(e.srcElement).parent().parent().find('img').toggleClass(effect);
     };
 
+    $scope.$on('$routeChangeStart', function(next, current) {
+      $('.main-container').css('opacity', '0.3');
+    });
 
   }
 

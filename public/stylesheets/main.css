@@ -1,5 +1,4 @@
 body {
-  /*padding: 50px;*/
   padding-top: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url(../images/blizzard.png);
@@ -7,6 +6,11 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+.main-container {
+  transition: opacity 700ms ease;
+  opacity: 0.3;
 }
 
 .content-block {
