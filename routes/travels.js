@@ -6,15 +6,30 @@ var firebaseRootRef = new Firebase('https://travelpal.firebaseio.com/travels');
 
 exports.create = function (req, res) {
   var newTravel = req.body;
-  var userID = newTravel.user;
-  newTravel.users = [userID];
-  delete newTravel["user"];
-  var travelID = firebaseRootRef.push(newTravel).name();
+  var userName = newTravel.user;
+  var userRef =  new Firebase("https://travelpal.firebaseio.com/users");
+  var currentUserID = null;
+  userRef.once("value", function( snapshot ) {
+    var users = snapshot.val(); 
+    for(var userID in users){
+      var user = users[userID];
+      if(user.name == userName) currentUserID = userID;
+    }
+    if(currentUserID == null) { 
+      res.status(404).send("cannot create travel with undefined user");
+      return;
+    }
 
-  var travelRef = new Firebase(firebaseRootRef.child(travelID).toString());
-  travelRef.once("value", function( snapshot ) {
-    res.json( { travelID: travelID, content: snapshot.val()});
+    newTravel.users = [currentUserID];
+    delete newTravel["user"];
+    var travelID = firebaseRootRef.push(newTravel).name();
+
+    var travelRef = new Firebase(firebaseRootRef.child(travelID).toString());
+    travelRef.once("value", function( snapshot ) {
+      res.json( { travelID: travelID, content: snapshot.val()});
+    });
   });
+
 };
 
 exports.list = function (req, res) {
