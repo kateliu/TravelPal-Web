@@ -17,3 +17,27 @@ exports.info = function ( req, res) {
   });
 };
 
+exports.createExpense = function(req, res) {
+  var eventId = req.params.id;
+  var expenseInfo = req.body;
+  var expensesRef = EventsRef.child(eventId + '/expenses');
+  var expense = {
+    description: expenseInfo.description,
+    paidBy: expenseInfo.paidBy,
+    cost: parseFloat(expenseInfo.cost),
+    payers: {}
+  };
+
+  expenseInfo.people.split(/[ ,]+/).forEach(function(payer) {
+    expense.payers[payer] = true;
+  });
+
+  expensesRef.push(expense, function(error) {
+    if(error){
+      res.status(404).send("400 Bad Request");
+    }
+    else{
+      res.json(expense);
+    }
+  });
+};

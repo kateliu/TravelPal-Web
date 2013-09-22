@@ -15,12 +15,12 @@ var id = function(child) {
 // Users
 //
 var users = {};
-users[id('users')] = {name: 'Sean',   imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/000/24b/0b9/25328d7.jpg'};
-users[id('users')] = {name: 'Clyde',  imageUrl: 'http://m.c.llnw.licdn.com/media/p/2/000/188/324/1ef2688.jpg'};
-users[id('users')] = {name: 'Lydian', imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/005/00f/11c/054c9ac.jpg'};
-users[id('users')] = {name: 'Dan',    imageUrl: 'http://m.c.llnw.licdn.com/media/p/5/000/291/0cf/035a4e5.jpg'};
-users[id('users')] = {name: 'Kate',   imageUrl: 'http://m.c.llnw.licdn.com/media/p/1/000/1ec/0fd/2e82dbb.jpg'};
-users[id('users')] = {name: 'Owen',   imageUrl: 'http://m.c.llnw.licdn.com/media/p/6/000/1ea/28f/3eebfe9.jpg'};
+users['Sean']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/000/24b/0b9/25328d7.jpg'};
+users['Clyde']  = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/2/000/188/324/1ef2688.jpg'};
+users['Lydian'] = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/005/00f/11c/054c9ac.jpg'};
+users['Dan']    = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/5/000/291/0cf/035a4e5.jpg'};
+users['Kate']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/1/000/1ec/0fd/2e82dbb.jpg'};
+users['Owen']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/6/000/1ea/28f/3eebfe9.jpg'};
 var userIds = Object.keys(users);
 
 //
@@ -52,13 +52,13 @@ var createEvent = function(eventInfo) {
     var expenseId = id('/events/' + eventId + '/expenses');
     var expense = {
       description: expenseInfo.description,
+      cost: expenseInfo.cost,
+      paidBy: expenseInfo.paidBy,
       payers: {}
     };
 
-    expenseInfo.payers.forEach(function(payerInfo) {
-      var payerId = payerInfo.user;
-      expense.payers[payerId] = {};
-      expense.payers[payerId]['cost'] = payerInfo.cost;
+    expenseInfo.payers.forEach(function(payerId) {
+      expense.payers[payerId] = true;
     });
 
     event.expenses[expenseId] = expense;
@@ -79,14 +79,9 @@ createEvent({
   expenses: [
     {
       'description': '',
-      'payers': [
-        {user: userIds[0], cost: 14.15},
-        {user: userIds[1], cost: 14.15},
-        {user: userIds[2], cost: 14.15},
-        {user: userIds[3], cost: 14.15},
-        {user: userIds[4], cost: 14.15},
-        {user: userIds[5], cost: 14.15}
-      ]
+      'cost': 84.9,
+      'paidBy': userIds[1],
+      'payers': [userIds[0], userIds[1], userIds[2], userIds[3], userIds[4], userIds[5]]
     }
   ]
 });
@@ -106,19 +101,15 @@ createEvent({
   expenses: [
     {
       'description': 'Ticket fare',
-      'payers': [
-        {user: userIds[0], cost: 18.25},
-        {user: userIds[1], cost: 18.25},
-        {user: userIds[3], cost: 18.25},
-        {user: userIds[5], cost: 18.25}
-      ]
+      'cost': 73,
+      'paidBy': userIds[3],
+      'payers': [userIds[0], userIds[1], userIds[3], userIds[5]]
     },
     {
       'description': 'Popcorn',
-      'payers': [
-        {user: userIds[0],cost: 3.25},
-        {user: userIds[3],cost: 3.25}
-      ]
+      'cost': 6.5,
+      'paidBy': userIds[0],
+      'payers': [userIds[0], userIds[3]]
     }
   ]
 });
@@ -137,11 +128,9 @@ createEvent({
   expenses: [
     {
       'description': 'Ticket fare',
-      'payers': [
-        {user: userIds[1], cost: 8.5},
-        {user: userIds[2], cost: 8.5},
-        {user: userIds[3], cost: 8.5}
-      ]
+      'cost': 25.5,
+      'paidBy': userIds[2],
+      'payers': [userIds[1], userIds[2], userIds[3]]
     }
   ]
 });
@@ -160,11 +149,9 @@ createEvent({
   expenses: [
     {
       'description': 'Ticket fare',
-      'payers': [
-        {user: userIds[0], cost: 12},
-        {user: userIds[1], cost: 12},
-        {user: userIds[4], cost: 12}
-      ]
+      'cost': 36,
+      'paidBy': userIds[2],
+      'payers': [userIds[2], userIds[3]]
     }
   ]
 });
