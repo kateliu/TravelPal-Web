@@ -56,14 +56,9 @@ travelpalApp.controller('travelCtrl', ['$scope', '$routeParams', 'angularFire', 
       var expenses = $scope.events[eventId].expenses;
       var totalExpense = 0;
       var expenseId;
-      var payers;
-      var payerId;
 
       for (expenseId in expenses) {
-        payers = expenses[expenseId].payers;
-        for (payerId in payers) {
-          totalExpense = totalExpense + payers[payerId].cost;
-        }
+        totalExpense = totalExpense + expenses[expenseId].cost;
       }
 
       return totalExpense;
