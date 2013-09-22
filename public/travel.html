@@ -43,3 +43,61 @@
 
   <h3>Total Expense <span class="label label-default">10.00 USD</span> </h3>
 </div>
+
+<div>
+  <h1>{{travel.description}}</h1>
+  <div>
+    From <span>{{travel.time[0] | date:'medium'}}</span>
+  </div>
+  <div>
+    To <span>{{travel.time[1] | date:'medium'}}</span>
+  </div>
+
+  <h2>Participants</h2>
+  <ul>
+    <li ng-repeat="(userId, dummy) in travel.users">
+      <img ng-src="{{users[userId].imageUrl}}"
+           title="{{users[userId].name}}"
+           alt="{{users[userId].name}}">
+    </li>
+  </ul>
+
+  <h2>Events</h2>
+  <div ng-repeat="event in travel.events">
+    <h3>{{event.description}}</h3>
+    <div>
+      <div>
+        At {{event.location}}
+      </div>
+
+      <div>
+        From <span>{{event.time[0] | date:'medium'}}</span>
+      </div>
+      <div>
+        To <span>{{event.time[1] | date:'medium'}}</span>
+      </div>
+
+      <h4>Participants</h4>
+      <ul>
+        <li ng-repeat="(userId, dummy) in event.users">
+          <img ng-src="{{users[userId].imageUrl}}"
+               title="{{users[userId].name}}"
+               alt="{{users[userId].name}}">
+        </li>
+      </ul>
+
+      <h4>Photos</h4>
+      <img ng-repeat="(dummy, imageUrl) in event.photos" ng-src="{{imageUrl}}">
+
+      <h4>Expenses</h4>
+      <div ng-repeat="expense in event.expenses">
+        <h5>{{expense.description || "No title"}}</h5>
+        <ul>
+          <li ng-repeat="(userId, payerInfo) in expense.payers">
+            {{users[userId].name}}: {{payerInfo.cost | currency:"$"}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
