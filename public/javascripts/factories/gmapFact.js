@@ -9,6 +9,7 @@ travelpalApp.factory("gMapFact", function() {
       
       var mapOptions = {
         zoom: 12,
+        scrollwheel: false,
         center: (new google.maps.LatLng(location[0], location[1])),
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
