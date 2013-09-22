@@ -21,7 +21,16 @@ a {
   box-shadow: 0 0 6px 1px #ccc;
 }
 
+.travelers {
+  padding-right: 2px;
+  max-height: 360px;
+  overflow: auto;
+}
+
 .user-img {
-  width: 100%;
-  margin: 6px;
+  float: right;
+  width: 60px;
+  margin: 4px;
+  border: 1px solid #999;
+  border-radius: 1px;
 }
