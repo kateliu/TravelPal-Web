@@ -90,3 +90,9 @@ a {
 .photo-sepia { -webkit-filter : sepia(0.6); }
 .photo-invert { -webkit-filter : invert(1); }
 .photo-saturate { -webkit-filter : saturate(2.0); }
+
+
+.jumbotron {
+  margin-top: 48px;
+
+}
