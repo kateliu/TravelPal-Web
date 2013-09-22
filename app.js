@@ -32,8 +32,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/users/:id', users.listTravels);
-app.get('/users/:id/open', users.getOpenTravel);
+app.get('/users/:name', users.listTravels);
+app.get('/users/:name/open', users.getOpenTravel);
 
 app.get('/travels', travels.list);
 app.post('/travels', travels.create);
