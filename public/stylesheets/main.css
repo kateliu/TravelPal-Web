@@ -40,14 +40,14 @@ a {
 }
 .event-user-img {
   width: 48px;
-  margin: 0 3px 10px 3px;
+  margin: 0 3px 16px 3px;
   border: 1px solid #999;
   border-radius: 1px;
 }
 .event-imgs {
   position: absolute; top: 0; right: 0;
   width: 360px; height: 96%;
-  margin: -6px 6px 0 0;
+  margin: -10px 10px 0 0;
   overflow: hidden;
 }
 .event-img {
