@@ -15,11 +15,12 @@ var id = function(child) {
 // Users
 //
 var users = {};
-users[id('users')] = { name: 'Sean',   imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/000/24b/0b9/25328d7.jpg' };
-users[id('users')] = { name: 'Clyde',  imageUrl: 'http://m.c.llnw.licdn.com/media/p/2/000/188/324/1ef2688.jpg' };
-users[id('users')] = { name: 'Lydian', imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/005/00f/11c/054c9ac.jpg' };
-users[id('users')] = { name: 'Kate',   imageUrl: 'http://m.c.llnw.licdn.com/media/p/1/000/1ec/0fd/2e82dbb.jpg' };
-users[id('users')] = { name: 'Owen',   imageUrl: 'http://m.c.llnw.licdn.com/media/p/6/000/1ea/28f/3eebfe9.jpg' };
+users[id('users')] = {name: 'Sean',   imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/000/24b/0b9/25328d7.jpg'};
+users[id('users')] = {name: 'Clyde',  imageUrl: 'http://m.c.llnw.licdn.com/media/p/2/000/188/324/1ef2688.jpg'};
+users[id('users')] = {name: 'Lydian', imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/005/00f/11c/054c9ac.jpg'};
+users[id('users')] = {name: 'Dan',    imageUrl: 'http://m.c.llnw.licdn.com/media/p/5/000/291/0cf/035a4e5.jpg'};
+users[id('users')] = {name: 'Kate',   imageUrl: 'http://m.c.llnw.licdn.com/media/p/1/000/1ec/0fd/2e82dbb.jpg'};
+users[id('users')] = {name: 'Owen',   imageUrl: 'http://m.c.llnw.licdn.com/media/p/6/000/1ea/28f/3eebfe9.jpg'};
 var userIds = Object.keys(users);
 
 //
@@ -73,7 +74,7 @@ createEvent({
     new Date(2013, 8, 10, 13, 30).getTime()
   ],
   location: [37.795907,-122.39392],
-  users: [userIds[0], userIds[1], userIds[2], userIds[3], userIds[4]],
+  users: [userIds[0], userIds[1], userIds[2], userIds[3], userIds[4], userIds[5]],
   photos: [],
   expenses: [
     {
@@ -83,7 +84,8 @@ createEvent({
         {user: userIds[1], cost: 14.15},
         {user: userIds[2], cost: 14.15},
         {user: userIds[3], cost: 14.15},
-        {user: userIds[4], cost: 14.15}
+        {user: userIds[4], cost: 14.15},
+        {user: userIds[5], cost: 14.15}
       ]
     }
   ]
@@ -96,7 +98,7 @@ createEvent({
     new Date(2013, 8, 10, 22, 00).getTime()
   ],
   location: [37.778262,-122.39081],
-  users: [userIds[0], userIds[1], userIds[4]],
+  users: [userIds[0], userIds[1], userIds[3], userIds[5]],
   photos: [
     'http://www.guide-to-baseball-betting.com/images/ATT_Park_Panorama.jpg',
     'http://2.bp.blogspot.com/-7w70JAQbwsg/To3z8yTDIFI/AAAAAAAAALg/UYOgWiu76E0/s1600/Giants5.JPG'
@@ -107,13 +109,15 @@ createEvent({
       'payers': [
         {user: userIds[0], cost: 18.25},
         {user: userIds[1], cost: 18.25},
-        {user: userIds[4], cost: 18.25}
+        {user: userIds[3], cost: 18.25},
+        {user: userIds[5], cost: 18.25}
       ]
     },
     {
       'description': 'Popcorn',
       'payers': [
-        {user: userIds[0],cost: 5.25}
+        {user: userIds[0],cost: 3.25},
+        {user: userIds[3],cost: 3.25}
       ]
     }
   ]
@@ -181,16 +185,13 @@ var createTravel = function(travelInfo) {
     events: {}
   };
 
-  travelInfo.users.forEach(function(userId) {
-    travel.users[userId] = true;
-  });
-
   travelInfo.events.forEach(function(eventId) {
     travel.events[eventId] = true;
-  });
-
-  travelInfo.events.forEach(function(eventId) {
     events[eventId].travel = travelId;
+
+    for (var userId in events[eventId].users) {
+      travel.users[userId] = true;
+    }
   });
 
   travels[travelId] = travel;
@@ -202,17 +203,15 @@ createTravel({
     new Date(2013, 8, 10, 9, 30).getTime(),
     new Date(2013, 8, 10, 22, 30).getTime()
   ],
-  users: [userIds[0], userIds[1], userIds[2], userIds[3], userIds[4]],
   events: [eventIds[0], eventIds[1]]
 });
 
 createTravel({
-  description: 'CMU Graduation',
+  description: 'CMU Graduation Trip',
   time: [
     new Date(2013, 5, 15, 8, 0).getTime(),
     new Date(2013, 5, 20, 18, 0).getTime()
   ],
-  users: [userIds[1], userIds[2], userIds[3]],
   events: [eventIds[2], eventIds[3]]
 });
 

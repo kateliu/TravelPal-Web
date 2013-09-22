@@ -11,10 +11,16 @@ travelpalApp.service('firebaseRef', function() {
   };
 
   this.events = newRef(eventsUrl);
+
+  this.event = function(eventId) {
+    return newRef(eventsUrl + '/' + eventId);
+  };
+
   this.travels = newRef(travelsUrl);
-  this.users = newRef(usersUrl);
 
   this.travel = function(travelId) {
     return newRef(travelsUrl + '/' + travelId);
   };
+
+  this.users = newRef(usersUrl);
 });
