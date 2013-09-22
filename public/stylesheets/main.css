@@ -94,5 +94,23 @@ a {
 
 .jumbotron {
   margin-top: 48px;
+  height: 360px;
 
+  background-image: url('http://farm8.staticflickr.com/7222/7321674824_7e0c2d2842_c_d.jpg');
+  background-size: cover;
+  background-position: 0 -80px;
+  text-align: center;
+}
+
+.jumbotron-title {
+  background-color: #ccc;
+  border-radius: 3px;
+  box-shadow: 0 0 6px 1px #999;
+  opacity: 0.8;
+}
+
+#search-box {
+  width: 256px;
+  margin-top: 64px;
+  opacity: 0.8;
 }
