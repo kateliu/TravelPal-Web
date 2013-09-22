@@ -32,7 +32,8 @@ if ('development' == app.get('env')) {
 
 app.get('/travels', travels.list);
 app.post('/travels', travels.create);
-app.get('/travels/:id', travels.listEvents);
+app.get('/travels/:id', travels.info);
+app.get('/travels/:id/events', travels.listEvents);
 
 //app.get('/users', user.list);
 

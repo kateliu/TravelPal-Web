@@ -18,10 +18,8 @@ exports.list = function (req, res) {
   });
 
 };
-
-exports.listEvents = function (req, res) {
+exports.info = function (req, res ) {
   var travelID = req.params.id;
-  console.log(travelID);
   var travelRef = new Firebase(firebaseRootRef.child(travelID).toString());
   travelRef.once("value", function(snapshot) {
     if(snapshot.val() == null) {
@@ -31,5 +29,17 @@ exports.listEvents = function (req, res) {
       res.json(snapshot.val());
     } 
   });
+};
 
+exports.listEvents = function (req, res) {
+  var travelID = req.params.id;
+  var travelRef = new Firebase(firebaseRootRef.child(travelID).toString());
+  travelRef.once("value", function(snapshot) {
+    if(snapshot.val() == null) {
+      res.status(404).send("404 Travel Not Found");
+    }
+    else{
+      res.json(snapshot.val().events);
+    } 
+  });
 };
