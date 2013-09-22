@@ -29,7 +29,11 @@ exports.createExpense = function(req, res) {
   };
 
   expenseInfo.people.split(/[ ,]+/).forEach(function(payer) {
+    var info = {};
+    info[payer] = true;
+
     expense.payers[payer] = true;
+    EventsRef.child(eventId + '/users').update(info);
   });
 
   expensesRef.push(expense, function(error) {
