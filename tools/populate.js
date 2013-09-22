@@ -15,12 +15,20 @@ var id = function(child) {
 // Users
 //
 var users = {};
-users['Sean']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/000/24b/0b9/25328d7.jpg'};
-users['Clyde']  = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/2/000/188/324/1ef2688.jpg'};
-users['Lydian'] = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/005/00f/11c/054c9ac.jpg'};
-users['Dan']    = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/5/000/291/0cf/035a4e5.jpg'};
-users['Kate']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/1/000/1ec/0fd/2e82dbb.jpg'};
-users['Owen']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/6/000/1ea/28f/3eebfe9.jpg'};
+users['Sean']    = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/000/24b/0b9/25328d7.jpg'};
+users['Clyde']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/2/000/188/324/1ef2688.jpg'};
+users['Lydian']  = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/005/00f/11c/054c9ac.jpg'};
+users['Dan']     = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/5/000/291/0cf/035a4e5.jpg'};
+users['Kate']    = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/1/000/1ec/0fd/2e82dbb.jpg'};
+users['Owen']    = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/6/000/1ea/28f/3eebfe9.jpg'};
+users['Jenny']   = {imageUrl: 'https://graph.facebook.com/jennyvictoria.mendezlopez/picture'};
+users['Megan']   = {imageUrl: 'https://graph.facebook.com/megan.goetchius/picture'};
+users['Jiuchun'] = {imageUrl: 'https://graph.facebook.com/jiuchun.wei/picture'};
+users['Casey']   = {imageUrl: 'https://graph.facebook.com/caseyneistat/picture'};
+users['Dean']    = {imageUrl: 'https://graph.facebook.com/dean.neistat/picture'};
+users['Rose']    = {imageUrl: 'https://graph.facebook.com/rose.dawydiakrapagnani/picture'};
+users['Antonio'] = {imageUrl: 'https://graph.facebook.com/mauiboy94/picture'};
+
 var userIds = Object.keys(users);
 
 //
@@ -49,7 +57,7 @@ var createEvent = function(eventInfo) {
   });
 
   eventInfo.expenses.forEach(function(expenseInfo) {
-    var expenseId = id('/events/' + eventId + '/expenses');
+    var expenseId = id('events/' + eventId + '/expenses');
     var expense = {
       description: expenseInfo.description,
       cost: expenseInfo.cost,
@@ -78,7 +86,7 @@ createEvent({
   photos: [],
   expenses: [
     {
-      'description': '',
+      'description': 'Lunch Cost',
       'cost': 84.9,
       'paidBy': userIds[1],
       'payers': [userIds[0], userIds[1], userIds[2], userIds[3], userIds[4], userIds[5]]
@@ -87,7 +95,7 @@ createEvent({
 });
 
 createEvent({
-  description: 'Giants vs Dodgers',
+  description: 'Giants vs Dodgers at At&T Park',
   time: [
     new Date(2013, 8, 10, 18, 30).getTime(),
     new Date(2013, 8, 10, 22, 00).getTime()
@@ -112,6 +120,20 @@ createEvent({
       'payers': [userIds[0], userIds[3]]
     }
   ]
+});
+
+createEvent({
+  description: 'Pier 39',
+  time: [
+    new Date(2013, 8, 10, 15, 00).getTime(),
+    new Date(2013, 8, 10, 17, 00).getTime()
+  ],
+  location: [37.3971614,-122.0241209],
+  users: [userIds[1], userIds[3], userIds[5]],
+  photos: [
+    'http://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Pier_39_San_Francisco_CA.JPG/1280px-Pier_39_San_Francisco_CA.JPG'
+  ],
+  expenses: []
 });
 
 createEvent({
@@ -169,15 +191,24 @@ var createTravel = function(travelInfo) {
     description: travelInfo.description,
     time: travelInfo.time,
     users: {},
-    events: {}
+    events: {},
+    expenses: {}
   };
 
   travelInfo.events.forEach(function(eventId) {
-    travel.events[eventId] = true;
-    events[eventId].travel = travelId;
+    var event = events[eventId];
+    var newExpenseId;
 
-    for (var userId in events[eventId].users) {
+    travel.events[eventId] = true;
+    event.travel = travelId;
+
+    for (var userId in event.users) {
       travel.users[userId] = true;
+    }
+
+    for (var expenseId in event.expenses) {
+      newExpenseId = id('travels/' + travelId + '/expenses');
+      travel.expenses[newExpenseId] = event.expenses[expenseId];
     }
   });
 
@@ -185,21 +216,21 @@ var createTravel = function(travelInfo) {
 };
 
 createTravel({
-  description: 'One day in SF',
+  description: 'One day in San Fransisco',
   time: [
     new Date(2013, 8, 10, 9, 30).getTime(),
     new Date(2013, 8, 10, 22, 30).getTime()
   ],
-  events: [eventIds[0], eventIds[1]]
+  events: [eventIds[0], eventIds[1], eventIds[2]]
 });
 
 createTravel({
-  description: 'CMU Graduation Trip',
+  description: 'CMU Graduation Trip in Pittsburgh',
   time: [
     new Date(2013, 5, 15, 8, 0).getTime(),
     new Date(2013, 5, 20, 18, 0).getTime()
   ],
-  events: [eventIds[2], eventIds[3]]
+  events: [eventIds[3], eventIds[4]]
 });
 
 var deleteAllData = function(callback) {

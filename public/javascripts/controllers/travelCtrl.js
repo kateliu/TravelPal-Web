@@ -34,8 +34,8 @@ travelpalApp.controller('travelCtrl', ['$scope', '$routeParams', 'angularFire', 
 
       for (eventId in $scope.travel.events) {
         eventsCount++;
-        eventsLocation[0] += $scope.events[eventId].location[0];
-        eventsLocation[1] += $scope.events[eventId].location[1];
+        eventsLocation[0] += parseFloat($scope.events[eventId].location[0]);
+        eventsLocation[1] += parseFloat($scope.events[eventId].location[1]);
         totalExpense = totalExpense + $scope.getEventExpense(eventId);
       }
 
