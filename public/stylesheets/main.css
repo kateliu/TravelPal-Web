@@ -14,9 +14,9 @@ a {
   margin: 6px;
   border-radius: 1px;
   box-shadow: 0 0 3px 1px #eee;
-  transition: all 300ms ease;
+  transition: all 600ms ease;
 }
 
 .content-block:hover {
-  box-shadow: 0 0 5px 1px #ddd;
+  box-shadow: 0 0 6px 1px #ccc;
 }
