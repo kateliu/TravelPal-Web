@@ -79,7 +79,6 @@ exports.createExpense = function(req, res) {
     payers: {}
   };
   var people = expenseInfo.people.split(/[ ,]+/);
-
   people.forEach(function(payer) {
     var info = {};
     info[payer] = true;
@@ -87,10 +86,10 @@ exports.createExpense = function(req, res) {
     expense.payers[payer] = true;
     EventsRef.child(eventId + '/users').update(info);
   });
-
+  var travelID = null;
   EventsRef.child(eventId).once('value', function(snapshot) {
     var event = snapshot.val();
-
+    travelID = event.travel;
     people.forEach(function(payer) {
       var info = {};
       info[payer] = true;
@@ -104,6 +103,8 @@ exports.createExpense = function(req, res) {
       res.status(404).send("400 Bad Request");
     }
     else{
+      var travelRef = new Firebase("https://travelpal.firebaseio.com/travels").child(travelID).child("expenses").push(expense);
+      
       res.json(expense);
     }
   });
