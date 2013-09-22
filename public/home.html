@@ -21,14 +21,15 @@
       <h1>TravelPal</h1>
       <p>The best paycheck and expereince sharing solution for travelers.</p>
     </div>
-    <input type="text" id="search-box" ng-click="scrollDown()" class="form-control input-lg" placeholder="Search for Some Travels">
+    <input type="text" id="search-box" ng-model="query" ng-focus="scrollDown()" class="form-control input-lg" placeholder="Search for Some Travels">
   </div>
 
-  <div class="row content-block travel-card" ng-repeat="(travelId, travel) in travels">
+  <div class="row content-block travel-card" ng-repeat="(travelId, travel) in travels" ng-show="travel.description.toLowerCase().indexOf(query.toLowerCase()) >= 0">
     <a href="#/travel/{{travelId}}"> <div class="col-md-12">
       <h3>{{travel.description}}
         <small> {{travel.time[0] | date:'mediumDate'}} </small>
-        <span class="label label-default">0 USD</span>
+        <span class="label label-default">{{getPerPersonExpense(travelId) | number:1}} per Person</span>
+        <span class="label label-default">{{getTravelExpense(travelId)}} in Total</span>
       </h3>
       <img class="event-user-img" ng-repeat="(userId, dummy) in travel.users" ng-src="{{users[userId].imageUrl}}">
     </div></a>
@@ -37,8 +38,9 @@
 </div>
 
 
-<div ng-repeat="travel in travels">
+<!-- <div ng-repeat="(travelId, travel) in travels">
   <h1>{{travel.description}}</h1>
+  Total: {{getTravelExpense(travelId)}}, Per user: {{getPerPersonExpense(travelId)}}
   <div>
     From <span>{{travel.time[0] | date:'medium'}}</span>
   </div>
@@ -91,3 +93,4 @@
   </div>
 </div>
 
+ -->
