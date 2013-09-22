@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container main-container">
   <div class="page-header">
     <h1>{{event.description}} <small> {{event.time[0] | date:'shortTime'}} on {{event.time[0] | date:'mediumDate'}} </small> </h1>
   </div>
@@ -45,18 +45,18 @@
     </div>
   </div>
 
-  <h3>Expenses</h3>
+  <h2>Expenses</h2>
   <div class="row content-block">
     <div class="expense-cards" ng-repeat="expense in event.expenses">
-      <h4>{{expense.description || "No title"}}
+      <h3>{{expense.description || "No title"}}
         <span class="label label-default">{{expense.cost}} USD</span>
-      </h4>
+      </h3>
     </div>
   </div>
 
   <h2>Total Expense
-    <span class="label label-default">{{(getEventExpense()/getUsersCount()) | number:1}} USD per Person</span>
-    <span class="label label-default">{{getEventExpense()}} USD in Total</span>
+    <span class="label label-default">{{(getEventExpense()/getUsersCount()) | number:1}} USD / Person</span>
+    <span class="label label-default">{{getEventExpense()}} USD Total</span>
   </h2>
 
 </div>

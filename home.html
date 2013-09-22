@@ -14,12 +14,15 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container main-container">
 
   <div class="jumbotron">
+    <div class="jumbotron-bg">
+      <img src="http://farm8.staticflickr.com/7222/7321674824_7e0c2d2842_c_d.jpg">
+    </div>
     <div class="jumbotron-title">
       <h1>TravelPal</h1>
-      <p>The best paycheck and expereince sharing solution for travelers.</p>
+      <p>The best payment and experience sharing for travelers.</p>
     </div>
     <input type="text" id="search-box" ng-model="query" ng-focus="scrollDown()" class="form-control input-lg" placeholder="Search for Some Travels">
   </div>
@@ -28,8 +31,8 @@
     <a href="#/travel/{{travelId}}"> <div class="col-md-12">
       <h3>{{travel.description}}
         <small> {{travel.time[0] | date:'mediumDate'}} </small>
-        <span class="label label-default">{{getPerPersonExpense(travelId) | number:1}} USD per Person</span>
-        <span class="label label-default">{{getTravelExpense(travelId)}} USD in Total</span>
+        <span class="label label-default">{{getPerPersonExpense(travelId) | number:1}} USD / Person</span>
+        <span class="label label-default">{{getTravelExpense(travelId)}} USD Total</span>
       </h3>
       <img class="event-user-img" ng-repeat="(userId, dummy) in travel.users" ng-src="{{users[userId].imageUrl}}">
     </div></a>

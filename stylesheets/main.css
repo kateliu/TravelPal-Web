@@ -1,12 +1,20 @@
 body {
-  /*padding: 50px;*/
   padding-top: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url(../images/blizzard.png);
 }
 
 a {
-  color: #00B7FF;
+  color: #c50028;
+}
+
+a:hover {
+  color: #a30006;
+}
+
+.main-container {
+  transition: opacity 700ms ease;
+  opacity: 0.3;
 }
 
 .content-block {
@@ -18,6 +26,7 @@ a {
 }
 .content-block:hover {
   box-shadow: 0 0 6px 1px #ccc;
+  -webkit-transform: translate3d(0, -2px, 0);
 }
 
 .event-card a:hover {
@@ -92,26 +101,40 @@ a {
 .photo-saturate { -webkit-filter : saturate(2.0); }
 
 .expense-cards {
-  margin: 0 10px;
+  margin: 0 0 16px 16px;
 }
 
 
 .jumbotron {
+  position: relative;
   margin-top: 36px;
+  padding-top:48px;
   height: 360px;
-  background-image: url('http://farm8.staticflickr.com/7222/7321674824_7e0c2d2842_c_d.jpg');
-  background-size: cover;
-  background-position: 0 -80px;
   text-align: center;
   box-shadow: 0 0 6px 1px #999;
 }
 
+.jumbotron-bg {
+  position: absolute; left: 0; top: 0;
+  width:100%; height: 100%;
+  -webkit-filter: brightness(0.5) sepia(0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.jumbotron-bg > img {
+  width: 100%;
+  margin-top: -80px;
+}
+
 .jumbotron-title {
   width: 672px;
-  background-color: #ccc;
   border-radius: 3px;
   margin: 0 auto;
-  box-shadow: 0 0 6px 1px #999;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 0 8px #000;
   opacity: 0.8;
 }
 
@@ -121,10 +144,19 @@ a {
   margin: 96px auto 0 auto;
 }
 
+#search-box:focus {
+  border-color: #C56375;
+}
+
 .travel-card a:hover {
   text-decoration: none;
 }
 
 .label {
   padding-bottom: 1px;
+  opacity: 0.8;
+}
+
+.label:hover {
+  opacity: 1;
 }
