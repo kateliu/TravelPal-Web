@@ -88,7 +88,7 @@ exports.createEvent = function (req, res ) {
   firebaseRootRef.child(travelID + "/events").push(eventJson);
   eventsRef.child(eventID).on("value", function(snapshot) {
     console.log(snapshot.val() );
-    res.json(snapshot.val() ); 
+    res.json({eventID: eventID, content: snapshot.val()}); 
   });
 };
 
