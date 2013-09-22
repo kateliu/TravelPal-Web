@@ -87,7 +87,7 @@ createEvent({
 });
 
 createEvent({
-  description: 'Giants vs Dodgers',
+  description: 'Giants vs Dodgers at At&T Park',
   time: [
     new Date(2013, 8, 10, 18, 30).getTime(),
     new Date(2013, 8, 10, 22, 00).getTime()
@@ -112,6 +112,20 @@ createEvent({
       'payers': [userIds[0], userIds[3]]
     }
   ]
+});
+
+createEvent({
+  description: 'Pier 39',
+  time: [
+    new Date(2013, 8, 10, 15, 00).getTime(),
+    new Date(2013, 8, 10, 17, 00).getTime()
+  ],
+  location: [37.3971614,-122.0241209],
+  users: [userIds[1], userIds[3], userIds[5]],
+  photos: [
+    'http://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Pier_39_San_Francisco_CA.JPG/1280px-Pier_39_San_Francisco_CA.JPG'
+  ],
+  expenses: []
 });
 
 createEvent({
@@ -185,7 +199,7 @@ var createTravel = function(travelInfo) {
 };
 
 createTravel({
-  description: 'One day in SF',
+  description: 'One day in San Fransisco',
   time: [
     new Date(2013, 8, 10, 9, 30).getTime(),
     new Date(2013, 8, 10, 22, 30).getTime()
@@ -194,7 +208,7 @@ createTravel({
 });
 
 createTravel({
-  description: 'CMU Graduation Trip',
+  description: 'CMU Graduation Trip in Pittsburgh',
   time: [
     new Date(2013, 5, 15, 8, 0).getTime(),
     new Date(2013, 5, 20, 18, 0).getTime()
