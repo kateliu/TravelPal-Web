@@ -22,6 +22,7 @@ exports.create = function (req, res) {
     }
     newTravel.time = [currentTimeStamp];
     newTravel.users = [currentUserID];
+    newTravel.events = {};
     delete newTravel["user"];
     var travelID = firebaseRootRef.push(newTravel).name();
 
@@ -77,7 +78,17 @@ exports.listEvents = function (req, res) {
 };
 
 exports.createEvent = function (req, res ) {
-  //var travelID = 
-
+  var travelID = req.params.id; 
+  var eventsRef = new Firebase('https://travelpal.firebaseio.com/events');
+  var newEvent = req.body;
+  var eventID = eventsRef.push(newEvent).name();
+  var eventJson = {}; 
+  eventJson[eventID] = true;
+  console.log(eventID);
+  firebaseRootRef.child(travelID + "/events").push(eventJson);
+  eventsRef.child(eventID).on("value", function(snapshot) {
+    console.log(snapshot.val() );
+    res.json(snapshot.val() ); 
+  });
 };
 
