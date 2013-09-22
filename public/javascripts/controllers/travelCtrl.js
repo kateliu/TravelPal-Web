@@ -16,6 +16,10 @@ travelpalApp.controller('travelCtrl', ['$scope', '$routeParams', 'angularFire', 
       eventsReady = true;
     });
 
+    // gMapFact.init($scope.event.location, function(){
+    //   gMapFact.addMarker($scope.event.location, $scope.event.description);
+    // });
+
     angularFire(firebaseRef.travel($scope.travelId), $scope, 'travel').then(function() {
       travelReady = true;
     });
@@ -23,24 +27,31 @@ travelpalApp.controller('travelCtrl', ['$scope', '$routeParams', 'angularFire', 
     angularFire(firebaseRef.users, $scope, 'users');
 
     $scope.getTravelExpense = function() {
-      if (!eventsReady || !travelReady) {
-        return 0;
-      }
+      if (!eventsReady || !travelReady) { return 0; }
 
       var totalExpense = 0;
       var eventId;
+      var eventsCount = 0;
+      var eventsLocation = [0, 0];
 
       for (eventId in $scope.travel.events) {
+        eventsCount++;
+        eventsLocation[0] += $scope.events[eventId].location[0];
+        eventsLocation[1] += $scope.events[eventId].location[1];
         totalExpense = totalExpense + $scope.getEventExpense(eventId);
       }
+
+      gMapFact.init( [eventsLocation[0]/eventsCount, eventsLocation[1]/eventsCount], function(){
+        for (eventId in $scope.travel.events) {
+          gMapFact.addMarker($scope.events[eventId].location, $scope.events[eventId].description);
+        }
+      });
 
       return totalExpense;
     };
 
     $scope.getEventExpense = function(eventId) {
-      if (!eventsReady || !travelReady) {
-        return 0;
-      }
+      if (!eventsReady || !travelReady) { return 0; }
 
       var expenses = $scope.events[eventId].expenses;
       var totalExpense = 0;
