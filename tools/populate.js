@@ -82,16 +82,16 @@ var createTravel = function(travelInfo) {
 createTravel({
   description: 'One day in SF',
   time: [
-    new Date(2013, 9, 10, 9, 30).getTime(),
-    new Date(2013, 9, 10, 22, 30).getTime()
+    new Date(2013, 8, 10, 9, 30).getTime(),
+    new Date(2013, 8, 10, 22, 30).getTime()
   ],
   users: [userIds[0], userIds[1], userIds[2], userIds[3], userIds[4]],
   events: [
     {
       description: 'Lunch at Ferry Plaza Seafood',
       time: [
-        new Date(2013, 9, 10, 12, 00).getTime(),
-        new Date(2013, 9, 10, 1, 30).getTime()
+        new Date(2013, 8, 10, 12, 00).getTime(),
+        new Date(2013, 8, 10, 13, 30).getTime()
       ],
       location: [37.795907,-122.39392],
       users: [userIds[0], userIds[1], userIds[2], userIds[3], userIds[4]],
@@ -112,8 +112,8 @@ createTravel({
     {
       description: 'Giants vs Dodgers',
       time: [
-        new Date(2013, 9, 10, 18, 30).getTime(),
-        new Date(2013, 9, 10, 22, 00).getTime()
+        new Date(2013, 8, 10, 18, 30).getTime(),
+        new Date(2013, 8, 10, 22, 00).getTime()
       ],
       location: [37.778262,-122.39081],
       users: [userIds[0], userIds[1], userIds[4]],
@@ -174,8 +174,8 @@ createTravel({
     {
       description: 'Kings Dominion',
       time: [
-        new Date(2013, 9, 12, 8, 30).getTime(),
-        new Date(2013, 9, 12, 18, 0).getTime()
+        new Date(2013, 5, 18, 8, 30).getTime(),
+        new Date(2013, 5, 18, 18, 0).getTime()
       ],
       location: [37.842614,-77.446428],
       users: [userIds[2], userIds[3]],
@@ -215,17 +215,9 @@ function insertUsers(callback) {
 }
 
 async.series([
-  //authenticate,
   deleteAllData,
   insertCollection.bind(null, 'users', users),
   insertCollection.bind(null, 'travels', travels)
-  /*
-  insertItems,
-  insertCategories,
-  insertPortfolios,
-  insertSessions,
-  insertBackstages,
-  */
 ],
 function(error, results) {
   if (error) {
