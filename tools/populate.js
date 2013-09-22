@@ -170,6 +170,114 @@ createEvent({
   ]
 });
 
+createEvent({
+  description: 'Buy Air Ticket',
+  time: [
+    new Date(2013, 5, 18, 8, 30).getTime(),
+    new Date(2013, 5, 18, 18, 0).getTime()
+  ],
+  location: [37.842614,-77.446428],
+  users: [userIds[0], userIds[3]],
+  photos: [
+    'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRY4DgEa5yM9rFdNJ6K2DsWTI6VpzoDESD65qFEMX5Ep6qxnp2arA'
+  ],
+  expenses: [
+    {
+      'description': 'Ticket fare',
+      'cost': 36,
+      'paidBy': userIds[2],
+      'payers': [userIds[2], userIds[3]]
+    }
+  ]
+});
+
+createEvent({
+  description: 'Pay for Jack in The Box',
+  time: [
+    new Date(2013, 5, 18, 8, 30).getTime(),
+    new Date(2013, 5, 18, 18, 0).getTime()
+  ],
+  location: [37.842614,-77.446428],
+  users: [userIds[2], userIds[3]],
+  photos: [
+    'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRY4DgEa5yM9rFdNJ6K2DsWTI6VpzoDESD65qFEMX5Ep6qxnp2arA'
+  ],
+  expenses: [
+    {
+      'description': 'Chicken and Chips',
+      'cost': 26,
+      'paidBy': userIds[2],
+      'payers': [userIds[2], userIds[4]]
+    },
+    {
+      'description': 'Burger and Chicken',
+      'cost': 14,
+      'paidBy': userIds[3],
+      'payers': [userIds[3], userIds[4]]
+    },
+  ]
+});
+
+createEvent({
+  description: 'Pay for the cruise',
+  time: [
+    new Date(2013, 5, 18, 8, 30).getTime(),
+    new Date(2013, 5, 18, 18, 0).getTime()
+  ],
+  location: [37.842614,-77.446428],
+  users: [userIds[2], userIds[3]],
+  photos: [
+    'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRY4DgEa5yM9rFdNJ6K2DsWTI6VpzoDESD65qFEMX5Ep6qxnp2arA'
+  ],
+  expenses: [
+    {
+      'description': 'Ticket fare',
+      'cost': 126,
+      'paidBy': userIds[3],
+      'payers': [userIds[1], userIds[2], userIds[3], userIds[4]]
+    },
+    {
+      'description': 'Wine on cruise',
+      'cost': 20,
+      'paidBy': userIds[3],
+      'payers': [userIds[1], userIds[2]]
+    },
+    {
+      'description': 'Pay for bikiny bar',
+      'cost': 40,
+      'paidBy': userIds[3],
+      'payers': [userIds[1], userIds[2], userIds[3]]
+    }
+  ]
+});
+
+createEvent({
+  description: 'Go to the inn',
+  time: [
+    new Date(2013, 5, 18, 8, 30).getTime(),
+    new Date(2013, 5, 18, 18, 0).getTime()
+  ],
+  location: [37.842614,-77.446428],
+  users: [userIds[2], userIds[3]],
+  photos: [
+    'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRY4DgEa5yM9rFdNJ6K2DsWTI6VpzoDESD65qFEMX5Ep6qxnp2arA'
+  ],
+  expenses: [
+    {
+      'description': 'Fee for two nights',
+      'cost': 200,
+      'paidBy': userIds[3],
+      'payers': [userIds[1], userIds[2], userIds[3], userIds[4]]
+    },
+    {
+      'description': 'Tips for the toothpaste',
+      'cost': 5,
+      'paidBy': userIds[3],
+      'payers': [userIds[1], userIds[2]]
+    }
+  ]
+});
+
 var eventIds = Object.keys(events);
 
 //
@@ -223,6 +331,14 @@ createTravel({
     new Date(2013, 5, 20, 18, 0).getTime()
   ],
   events: [eventIds[3], eventIds[4]]
+});
+
+createTravel({
+  description: 'Trip to Florida',
+  time: [
+    new Date(2013, 5, 15, 8, 0).getTime(),
+  ],
+  events: [eventIds[5], eventIds[6], eventIds[7], eventIds[8]]
 });
 
 var deleteAllData = function(callback) {
