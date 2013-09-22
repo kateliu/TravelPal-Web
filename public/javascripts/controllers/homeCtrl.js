@@ -71,5 +71,24 @@ travelpalApp.controller('homeCtrl', ['$scope', 'angularFire', 'firebaseRef',
     $scope.$on('$routeChangeStart', function(next, current) {
       $('.main-container').css('opacity', '0.3');
     });
+
+    $scope.$on('$viewContentLoaded', function(next, current) {
+      var frontImgs = [
+        ['http://farm8.staticflickr.com/7222/7321674824_7e0c2d2842_c_d.jpg', 140],
+        ['http://farm9.staticflickr.com/8512/8352608407_e6418d1179_o.jpg', 240],
+        ['https://lh4.googleusercontent.com/-tWfWvc5SOrU/Uj8VeoSZVAI/AAAAAAAAAGM/t8neIJvuH0o/w800-h466-no/web_splash_next.jpg', 180]
+      ];
+
+      var selectedImg = 0;
+      setInterval( function(){
+        selectedImg = (selectedImg+1)%frontImgs.length;
+        $('.jumbotron-bg img').fadeOut('slow', function(){
+          $('.jumbotron-bg img').attr('src', frontImgs[selectedImg][0]);
+          $('.jumbotron-bg img').css('margin-top', '-'+frontImgs[selectedImg][1]+'px');
+        });
+        $('.jumbotron-bg img').fadeIn('slow');
+      }, 9000);
+
+    });
   }
 ]);
