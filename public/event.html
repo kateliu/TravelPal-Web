@@ -45,7 +45,19 @@
     </div>
   </div>
 
-  <h2>Total Expense <span class="label label-default">{{getEventExpense()}} USD</span> </h2>
+  <h3>Expenses</h3>
+  <div class="row content-block">
+    <div class="expense-cards" ng-repeat="expense in event.expenses">
+      <h4>{{expense.description || "No title"}}
+        <span class="label label-default">{{expense.cost}} USD</span>
+      </h4>
+    </div>
+  </div>
+
+  <h2>Total Expense
+    <span class="label label-default">{{(getEventExpense()/getUsersCount()) | number:1}} USD per Person</span>
+    <span class="label label-default">{{getEventExpense()}} USD in Total</span>
+  </h2>
 
 </div>
 

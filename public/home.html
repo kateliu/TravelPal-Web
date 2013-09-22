@@ -9,26 +9,38 @@
       <a class="navbar-brand" href="#">TravelPal</a>
     </div>
     <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+
     </div><!--/.nav-collapse -->
   </div>
 </div>
 
 <div class="container">
 
-  <div class="starter-template">
-    <h1>Bootstrap starter template</h1>
-    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+  <div class="jumbotron">
+    <div class="jumbotron-title">
+      <h1>TravelPal</h1>
+      <p>The best paycheck and expereince sharing solution for travelers.</p>
+    </div>
+    <input type="text" id="search-box" ng-model="query" ng-focus="scrollDown()" class="form-control input-lg" placeholder="Search for Some Travels">
+  </div>
+
+  <div class="row content-block travel-card" ng-repeat="(travelId, travel) in travels" ng-show="travel.description.toLowerCase().indexOf(query.toLowerCase()) >= 0">
+    <a href="#/travel/{{travelId}}"> <div class="col-md-12">
+      <h3>{{travel.description}}
+        <small> {{travel.time[0] | date:'mediumDate'}} </small>
+        <span class="label label-default">{{getPerPersonExpense(travelId) | number:1}} USD per Person</span>
+        <span class="label label-default">{{getTravelExpense(travelId)}} USD in Total</span>
+      </h3>
+      <img class="event-user-img" ng-repeat="(userId, dummy) in travel.users" ng-src="{{users[userId].imageUrl}}">
+    </div></a>
   </div>
 
 </div>
 
-<div ng-repeat="travel in travels">
+
+<!-- <div ng-repeat="(travelId, travel) in travels">
   <h1>{{travel.description}}</h1>
+  Total: {{getTravelExpense(travelId)}}, Per user: {{getPerPersonExpense(travelId)}}
   <div>
     From <span>{{travel.time[0] | date:'medium'}}</span>
   </div>
@@ -80,3 +92,5 @@
     </div>
   </div>
 </div>
+
+ -->

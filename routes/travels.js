@@ -45,12 +45,12 @@ exports.info = function (req, res ) {
   });
 };
 
-exports.end = function (req, res ) {
+exports.end = function (req, res) {
   var currentTimeStamp = new Date().getTime();
   var travelID = req.params.id; 
-  var travelTimeRef = new Firebase(firebaseRootRef.child(travelID + "/time").toString());
-  travelTimeRef.update({ 1:  currentTimeStamp});
-  var travelRef = new Firebase(firebaseRootRef.child(travelID).toString());
+  var travelTimeRef = firebaseRootRef.child(travelID + "/time");
+  travelTimeRef.update({1: currentTimeStamp});
+  var travelRef = firebaseRootRef.child(travelID);
   travelRef.on("value", function(snapshot){
     res.send(snapshot.val());
   });
@@ -76,12 +76,16 @@ exports.listEvents = function (req, res) {
 exports.createEvent = function (req, res ) {
   var travelID = req.params.id; 
   var eventsRef = new Firebase('https://travelpal.firebaseio.com/events');
-  var newEvent = req.body;
+  var newEvent = {
+    description: req.body.description,
+    location: [req.body.latitude, req.body.longitude],
+    time: [new Date().getTime()],
+    travel: travelID
+  }
   var eventID = eventsRef.push(newEvent).name();
   var eventJson = {}; 
   eventJson[eventID] = true;
-  console.log(eventID);
-  firebaseRootRef.child(travelID + "/events").push(eventJson);
+  firebaseRootRef.child(travelID + "/events").update(eventJson);
   eventsRef.child(eventID).on("value", function(snapshot) {
     console.log(snapshot.val() );
     res.json({eventID: eventID, content: snapshot.val()}); 

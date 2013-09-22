@@ -90,3 +90,37 @@ a {
 .photo-sepia { -webkit-filter : sepia(0.6); }
 .photo-invert { -webkit-filter : invert(1); }
 .photo-saturate { -webkit-filter : saturate(2.0); }
+
+.expense-cards {
+  margin: 0 10px;
+}
+
+
+.jumbotron {
+  margin-top: 36px;
+  height: 360px;
+  background-image: url('http://farm8.staticflickr.com/7222/7321674824_7e0c2d2842_c_d.jpg');
+  background-size: cover;
+  background-position: 0 -80px;
+  text-align: center;
+  box-shadow: 0 0 6px 1px #999;
+}
+
+.jumbotron-title {
+  width: 672px;
+  background-color: #ccc;
+  border-radius: 3px;
+  margin: 0 auto;
+  box-shadow: 0 0 6px 1px #999;
+  opacity: 0.8;
+}
+
+#search-box {
+  width: 512px;
+  opacity: 0.8;
+  margin: 96px auto 0 auto;
+}
+
+.travel-card a:hover {
+  text-decoration: none;
+}

@@ -36,7 +36,8 @@
     <a href="#/event/{{eventId}}"> <div class="col-md-12">
       <h3>{{event.description}}
         <small> {{event.time[0] | date:'shortTime'}} on {{event.time[0] | date:'mediumDate'}} </small>
-        <span class="label label-default">{{getEventExpense(eventId)}} USD</span>
+        <span class="label label-default">{{(getEventExpense(eventId)/getUsersCount(eventId)) | number:1}} USD per Person</span>
+        <!-- <span class="label label-default">{{getEventExpense(eventId)}} USD in Total</span> -->
       </h3>
       <img class="event-user-img" ng-repeat="(userId, dummy) in event.users" ng-src="{{users[userId].imageUrl}}" title="{{users[userId].name}}" alt="{{users[userId].name}}">
       <div class="event-imgs">
@@ -45,6 +46,9 @@
     </div></a>
   </div>
 
-  <h2>Total Expense <span class="label label-default">{{getTravelExpense()}} USD</span> </h2>
+  <h2>Total Expense
+    <span class="label label-default">{{(getTravelExpense()/getUsersCount()) | number:1}} USD per Person</span>
+    <span class="label label-default">{{getTravelExpense()}} USD in Total</span>
+  </h2>
 
 </div>
