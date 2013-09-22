@@ -49,7 +49,7 @@ var createEvent = function(eventInfo) {
   });
 
   eventInfo.expenses.forEach(function(expenseInfo) {
-    var expenseId = id('/events/' + eventId + '/expenses');
+    var expenseId = id('events/' + eventId + '/expenses');
     var expense = {
       description: expenseInfo.description,
       cost: expenseInfo.cost,
@@ -169,15 +169,24 @@ var createTravel = function(travelInfo) {
     description: travelInfo.description,
     time: travelInfo.time,
     users: {},
-    events: {}
+    events: {},
+    expenses: {}
   };
 
   travelInfo.events.forEach(function(eventId) {
-    travel.events[eventId] = true;
-    events[eventId].travel = travelId;
+    var event = events[eventId];
+    var newExpenseId;
 
-    for (var userId in events[eventId].users) {
+    travel.events[eventId] = true;
+    event.travel = travelId;
+
+    for (var userId in event.users) {
       travel.users[userId] = true;
+    }
+
+    for (var expenseId in event.expenses) {
+      newExpenseId = id('travels/' + travelId + '/expenses');
+      travel.expenses[newExpenseId] = event.expenses[expenseId];
     }
   });
 
