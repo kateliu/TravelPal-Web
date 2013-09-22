@@ -14,10 +14,12 @@ travelpalApp.controller('homeCtrl', ['$scope', 'angularFire', 'firebaseRef',
 
     angularFire(firebaseRef.events, $scope, 'events').then(function() {
       eventsReady = true;
+      if(travelsReady){ $('.main-container').css('opacity', '1'); }
     });
 
     angularFire(firebaseRef.travels, $scope, 'travels').then(function() {
       travelsReady = true;
+      if(eventsReady){ $('.main-container').css('opacity', '1'); }
     });
 
     angularFire(firebaseRef.users, $scope, 'users');
@@ -65,5 +67,9 @@ travelpalApp.controller('homeCtrl', ['$scope', 'angularFire', 'firebaseRef',
 
       return totalExpense;
     };
+
+    $scope.$on('$routeChangeStart', function(next, current) {
+      $('.main-container').css('opacity', '0.3');
+    });
   }
 ]);

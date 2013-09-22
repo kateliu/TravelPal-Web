@@ -1,12 +1,20 @@
 body {
-  /*padding: 50px;*/
   padding-top: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url(../images/blizzard.png);
 }
 
 a {
-  color: #00B7FF;
+  color: #c50028;
+}
+
+a:hover {
+  color: #a30006;
+}
+
+.main-container {
+  transition: opacity 700ms ease;
+  opacity: 0.3;
 }
 
 .content-block {
@@ -93,7 +101,7 @@ a {
 .photo-saturate { -webkit-filter : saturate(2.0); }
 
 .expense-cards {
-  margin: 0 10px;
+  margin: 0 0 16px 16px;
 }
 
 
@@ -133,6 +141,10 @@ a {
   width: 512px;
   opacity: 0.8;
   margin: 96px auto 0 auto;
+}
+
+#search-box:focus {
+  border-color: #C56375;
 }
 
 .travel-card a:hover {
