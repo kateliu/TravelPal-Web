@@ -139,8 +139,13 @@ exports.summary = function (req, res) {
     var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).update({payments: payments});
     var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).on("value", function( snapshot ) {
       var travel = snapshot.val();
+    if(travel == null) {
+      res.json({payments: payments, summary: people});
+    }
+    else{
     res.json( {payments: travel.payments, summary: travel.summary});
-  });
+    }
+    });
   });
 };
 
