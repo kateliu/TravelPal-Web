@@ -38,7 +38,9 @@ app.get('/users/:name/open', users.getOpenTravel);
 app.get('/travels', travels.list);
 app.post('/travels', travels.create);
 app.get('/travels/:id', travels.info);
+app.get('/travels/:id/end', travels.end);
 app.get('/travels/:id/events', travels.listEvents);
+app.post('travels/:id/events', travels.createEvent);
 app.get('/events/:id', events.info);
 
 
