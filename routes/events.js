@@ -1,6 +1,7 @@
 var Firebase = require('firebase');
 var _und = require("underscore");
 var EventsRef = new Firebase('https://travelpal.firebaseio.com/events');
+var TravelsRef = new Firebase('https://travelpal.firebaseio.com/travels');
 
 exports.info = function ( req, res) {
   var eventID = req.params.id;
@@ -54,6 +55,19 @@ exports.findEvents = function(req, res) {
   });
 };
 
+exports.update = function(req, res) {
+  var eventId = req.params.id;
+  var expenseInfo = req.body;
+  var expense = {
+    description: expenseInfo.description,
+  };
+
+  EventsRef.child(eventId).update(expense, function(error) {
+    // Ignore error
+    res.json({});
+  });
+};
+
 exports.createExpense = function(req, res) {
   var eventId = req.params.id;
   var expenseInfo = req.body;
@@ -64,13 +78,25 @@ exports.createExpense = function(req, res) {
     cost: parseFloat(expenseInfo.cost),
     payers: {}
   };
+  var people = expenseInfo.people.split(/[ ,]+/);
 
-  expenseInfo.people.split(/[ ,]+/).forEach(function(payer) {
+  people.forEach(function(payer) {
     var info = {};
     info[payer] = true;
 
     expense.payers[payer] = true;
     EventsRef.child(eventId + '/users').update(info);
+  });
+
+  EventsRef.child(eventId).once('value', function(snapshot) {
+    var event = snapshot.val();
+
+    people.forEach(function(payer) {
+      var info = {};
+      info[payer] = true;
+
+      TravelsRef.child(event.travel + '/users').update(info);
+    });
   });
 
   expensesRef.push(expense, function(error) {
