@@ -82,11 +82,11 @@ travelpalApp.controller('homeCtrl', ['$scope', 'angularFire', 'firebaseRef',
       var selectedImg = 0;
       setInterval( function(){
         selectedImg = (selectedImg+1)%frontImgs.length;
-        $('.jumbotron-bg img').fadeOut('slow', function(){
+        $('.jumbotron-bg img').fadeOut(1200, function(){
           $('.jumbotron-bg img').attr('src', frontImgs[selectedImg][0]);
           $('.jumbotron-bg img').css('margin-top', '-'+frontImgs[selectedImg][1]+'px');
         });
-        $('.jumbotron-bg img').fadeIn('slow');
+        $('.jumbotron-bg img').fadeIn(1200);
       }, 9000);
 
     });
