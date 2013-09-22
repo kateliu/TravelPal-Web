@@ -114,7 +114,7 @@ exports.summary = function (req, res) {
     for(var person in people){
       people[person].summary = people[person].credit - people[person].debt;
     }
-    
+    var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).update({summary: people});
     var payments = [];
     for(var person in people){
       if(people[person].summary < 0 ){
@@ -136,8 +136,11 @@ exports.summary = function (req, res) {
 
       }
     }
-    var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).update({summary: people, payments: payments});
-    res.json({payments: payments, summary: people});
+    var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).update({payments: payments});
+    var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).on("value", function( snapshot ) {
+      var travel = snapshot.val();
+    res.json( {payments: travel.payments, summary: travel.summary});
+  });
   });
 };
 
