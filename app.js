@@ -42,6 +42,7 @@ app.get('/travels/:id', travels.info);
 app.post('/travels/:id/end', travels.end);
 app.get('/travels/:id/events', travels.listEvents);
 app.get('/travels/:id/summary', travels.summary);
+app.get('/travels/:id/pay/:userName', travels.pay);
 
 app.get('/events/:id', events.info);
 app.post('/events/:id/update', events.update);
