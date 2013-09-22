@@ -3,7 +3,6 @@
 var Firebase = require('firebase');
 var _und = require("underscore");
 var firebaseRootRef = new Firebase('https://travelpal.firebaseio.com/travels');
-var Fiber = require("fibers");
 exports.create = function (req, res) {
   var newTravel = req.body;
   var userName = newTravel.user;
