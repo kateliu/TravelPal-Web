@@ -27,8 +27,9 @@
 
 </div>
 
-<div ng-repeat="travel in travels">
+<div ng-repeat="(travelId, travel) in travels">
   <h1>{{travel.description}}</h1>
+  Total: {{getTravelExpense(travelId)}}, Per user: {{getPerPersonExpense(travelId)}}
   <div>
     From <span>{{travel.time[0] | date:'medium'}}</span>
   </div>
