@@ -3,7 +3,7 @@
 var Firebase = require('firebase');
 var _und = require("underscore");
 var firebaseRootRef = new Firebase('https://travelpal.firebaseio.com/travels');
-
+var Fiber = require("fibers");
 exports.create = function (req, res) {
   var newTravel = req.body;
   var userName = newTravel.user;
@@ -92,3 +92,29 @@ exports.createEvent = function (req, res ) {
   });
 };
 
+exports.summary = function (req, res) {
+  var travelID = req.params.id;
+  var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).child("expenses");
+  travelRef.on("value", function (snapshot){
+    var expenses = snapshot.val();
+    var people = {};
+    for(var expenseID in expenses){
+      var expense = expenses[expenseID];
+      if( !(expense.paidBy in people)){
+        people[expense.paidBy] = {'debt': 0, 'credit': 0};
+      }
+      people[expense.paidBy].credit += expense.cost;
+      totalPayers = _und.reduce(expense.payers, function(memo, payer){ return memo + 1;} , 0);
+      for(var payer in expense.payers) {
+        if(!(payer in people)) {
+          people[payer] = {'debt': 0, 'credit': 0};
+        }
+        people[payer].debt += expense.cost/totalPayers;
+      }
+    }
+    for(var person in people){
+      people[person].summary = people[person].credit - people[person].debt;
+    }
+    res.json(people);
+  });
+}
