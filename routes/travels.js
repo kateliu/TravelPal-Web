@@ -2,6 +2,7 @@
 //Setup for firebase
 var Firebase = require('firebase');
 var firebaseRootRef = new Firebase('https://travelpal.firebaseio.com/travels');
+
 exports.create = function (req, res) {
   var newTravel = req.body;
   var id = firebaseRootRef.push(newTravel).name();
@@ -19,5 +20,16 @@ exports.list = function (req, res) {
 };
 
 exports.listEvents = function (req, res) {
-  res.json({param: req.params.id}); 
+  var travelID = req.params.id;
+  console.log(travelID);
+  var travelRef = new Firebase(firebaseRootRef.child(travelID).toString());
+  travelRef.once("value", function(snapshot) {
+    if(snapshot.val() == null) {
+      res.status(404).send("404 Travel Not Found");
+    }
+    else{
+      res.json(snapshot.val());
+    } 
+  });
+
 };
