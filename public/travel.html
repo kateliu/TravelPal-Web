@@ -40,8 +40,8 @@
   <h3>Events</h3>
   <div class="row content-block event-card" ng-repeat="(eventId, dummy) in travel.events" ng-init="event=events[eventId]">
     <div class="col-md-12">
-      <h4>{{event.description}} <small> {{event.time[0] | date:'mediumDate'}} </small> </h4>
-
+      <h4>{{event.description}} <small> {{event.time[0] | date:'shortTime'}} on {{event.time[0] | date:'mediumDate'}} </small> </h4>
+      <img ng-repeat="(dummy, imageUrl) in event.photos" ng-src="{{imageUrl}}">
     </div>
   </div>
 

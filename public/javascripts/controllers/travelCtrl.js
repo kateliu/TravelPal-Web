@@ -1,6 +1,6 @@
 'use strict';
 
-travelpalApp.controller('travelCtrl', ['$scope', '$routeParams', 'angularFire', 'firebaseRef',
+travelpalApp.controller('travelCtrl', ['$scope', '$routeParams', 'angularFire', 'firebaseRef', 'gMap',
   function($scope, $routeParams, angularFire, firebaseRef) {
     console.log('travelCtrl: ' + $routeParams.travelId);
 
@@ -11,9 +11,7 @@ travelpalApp.controller('travelCtrl', ['$scope', '$routeParams', 'angularFire', 
 
     $scope.getTotalExpense = function(){
       var total = 0;
-      //for(var event in $scope.events){
 
-      //}
       return total;
     };
 
