@@ -48,7 +48,11 @@ exports.info = function (req, res ) {
       res.status(404).send("404 Travel Not Found");
     }
     else{
-      res.json(snapshot.val());
+      var travel = snapshot.val();
+      travel.events = _und.map(travel.events, function( eventt, eventID) {
+        return eventID;
+      });
+      res.json(travel);
     } 
   });
 };
@@ -72,7 +76,11 @@ exports.listEvents = function (req, res) {
       res.status(404).send("404 Travel Not Found");
     }
     else{
-      res.json(snapshot.val().events);
+      var travel = snapshot.val();
+      travel.events = _und.map(travel.events, function( eventt, eventID) {
+        return eventID;
+      });
+      res.json(travel.events);
     } 
   });
 };
