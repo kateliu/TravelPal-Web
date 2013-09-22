@@ -15,12 +15,20 @@ var id = function(child) {
 // Users
 //
 var users = {};
-users['Sean']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/000/24b/0b9/25328d7.jpg'};
-users['Clyde']  = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/2/000/188/324/1ef2688.jpg'};
-users['Lydian'] = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/005/00f/11c/054c9ac.jpg'};
-users['Dan']    = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/5/000/291/0cf/035a4e5.jpg'};
-users['Kate']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/1/000/1ec/0fd/2e82dbb.jpg'};
-users['Owen']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/6/000/1ea/28f/3eebfe9.jpg'};
+users['Sean']    = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/000/24b/0b9/25328d7.jpg'};
+users['Clyde']   = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/2/000/188/324/1ef2688.jpg'};
+users['Lydian']  = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/3/005/00f/11c/054c9ac.jpg'};
+users['Dan']     = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/5/000/291/0cf/035a4e5.jpg'};
+users['Kate']    = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/1/000/1ec/0fd/2e82dbb.jpg'};
+users['Owen']    = {imageUrl: 'http://m.c.llnw.licdn.com/media/p/6/000/1ea/28f/3eebfe9.jpg'};
+users['Jenny']   = {imageUrl: 'https://graph.facebook.com/jennyvictoria.mendezlopez/picture'};
+users['Megan']   = {imageUrl: 'https://graph.facebook.com/megan.goetchius/picture'};
+users['Jiuchun'] = {imageUrl: 'https://graph.facebook.com/jiuchun.wei/picture'};
+users['Casey']   = {imageUrl: 'https://graph.facebook.com/caseyneistat/picture'};
+users['Dean']    = {imageUrl: 'https://graph.facebook.com/dean.neistat/picture'};
+users['Rose']    = {imageUrl: 'https://graph.facebook.com/rose.dawydiakrapagnani/picture'};
+users['Antonio'] = {imageUrl: 'https://graph.facebook.com/mauiboy94/picture'};
+
 var userIds = Object.keys(users);
 
 //
