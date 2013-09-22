@@ -43,6 +43,7 @@ app.post('/travels/:id/end', travels.end);
 app.get('/travels/:id/events', travels.listEvents);
 
 app.get('/events/:id', events.info);
+app.post('/events/:id/update', events.update);
 app.post('/events/find', events.findEvents);
 app.post('/events/:id/expenses', events.createExpense);
 

@@ -55,6 +55,19 @@ exports.findEvents = function(req, res) {
   });
 };
 
+exports.update = function(req, res) {
+  var eventId = req.params.id;
+  var expenseInfo = req.body;
+  var expense = {
+    description: expenseInfo.description,
+  };
+
+  EventsRef.child(eventId).update(expense, function(error) {
+    // Ignore error
+    res.json({});
+  });
+};
+
 exports.createExpense = function(req, res) {
   var eventId = req.params.id;
   var expenseInfo = req.body;
