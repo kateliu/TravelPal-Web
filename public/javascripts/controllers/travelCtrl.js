@@ -16,10 +16,6 @@ travelpalApp.controller('travelCtrl', ['$scope', '$routeParams', 'angularFire', 
       eventsReady = true;
     });
 
-    // gMapFact.init($scope.event.location, function(){
-    //   gMapFact.addMarker($scope.event.location, $scope.event.description);
-    // });
-
     angularFire(firebaseRef.travel($scope.travelId), $scope, 'travel').then(function() {
       travelReady = true;
     });
