@@ -22,9 +22,7 @@ travelpalApp.controller('eventCtrl', ['$scope', '$routeParams', 'angularFire', '
     angularFire(firebaseRef.users, $scope, 'users');
 
     $scope.getEventExpense = function() {
-      if (!eventReady) {
-        return 0;
-      }
+      if (!eventReady) { return 0; }
 
       var expenses = $scope.event.expenses;
       var totalExpense = 0;
@@ -41,5 +39,16 @@ travelpalApp.controller('eventCtrl', ['$scope', '$routeParams', 'angularFire', '
 
       return totalExpense;
     };
+
+
+    $scope.effect = function(e, effect){
+      //var elem = angular.element(e.srcElement);
+      //console.log(e.srcElement);
+      $(e.srcElement).parent().parent().find('img').toggleClass(effect);
+      //elem.css('background', 'blue');
+    };
+
+
   }
+
 ]);

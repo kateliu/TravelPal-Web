@@ -31,22 +31,26 @@
     </div>
   </div>
 
-  <h3>Photos</h3>
+  <h3 ng-show="event.photos">Photos</h3>
   <div class="row content-block photo-card" ng-repeat="(dummy, imageUrl) in event.photos">
-    <div class="col-md-11">
+    <div class="col-md-12">
       <img ng-src="{{imageUrl}}">
-    </div>
-    <div class="col-md-1">
-      <button>Test</button>
+      <div class="photo-filter-btns">
+        <button type="button" class="btn btn-default btn-xs" data-toggle="button" ng-click="effect($event, 'photo-highcontrast')">High Contrast</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="button" ng-click="effect($event, 'photo-grayscale')">BW</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="button" ng-click="effect($event, 'photo-sepia')">Sepia</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="button" ng-click="effect($event, 'photo-invert')">Invert</button>
+        <button type="button" class="btn btn-default btn-xs" data-toggle="button" ng-click="effect($event, 'photo-saturate')">Saturate</button>
+      </div>
     </div>
   </div>
 
-  <h2>Expense <span class="label label-default">{{getTravelExpense()}} USD</span> </h2>
+  <h2>Total Expense <span class="label label-default">{{getEventExpense()}} USD</span> </h2>
 
 </div>
 
 
-<div>
+<!-- <div>
   <h3>{{event.description}}</h3>
   <div>
     <div>
@@ -83,3 +87,4 @@
     </div>
   </div>
 </div>
+ -->
