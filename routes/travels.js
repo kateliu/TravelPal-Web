@@ -114,6 +114,54 @@ exports.summary = function (req, res) {
     for(var person in people){
       people[person].summary = people[person].credit - people[person].debt;
     }
-    res.json(people);
+    var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).update({summary: people});
+    var payments = [];
+    for(var person in people){
+      if(people[person].summary < 0 ){
+        var currentSummary = people[person];
+        for(var user in people){
+          if(people[user].summary > 0 ) {
+            if(Math.abs(currentSummary.summary) < people[user].summary){ 
+              payments.push({from: person, to: user, money:  Math.abs(currentSummary.summary)});
+              people[user].summary -= Math.abs(currentSummary.summary);
+              currentSummary.summary = 0; 
+            }
+            else {
+              payments.push({from: person, to: user, money: Math.abs(people[user].summary)});
+              currentSummary.summary += Math.abs(people[user].summary);
+              people[user].summary = 0; 
+            }
+          } 
+        }
+
+      }
+    }
+    var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).update({payments: payments});
+    var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID).on("value", function( snapshot ) {
+      var travel = snapshot.val();
+    if(travel == null) {
+      res.json({payments: payments, summary: people});
+    }
+    else{
+    res.json( {payments: travel.payments, summary: travel.summary});
+    }
+    });
   });
-}
+};
+
+exports.pay = function(req, res) {
+  var travelID = req.params.id;
+  var userName = req.params.userName;
+  var travelRef = new Firebase('https://travelpal.firebaseio.com/travels').child(travelID);
+  travelRef.on("value", function(snapshot){
+    var payments = snapshot.val().payments;
+    var payments = _und.map(payments, function(payment) {
+      if(payment.from == userName) {
+        payment.done = true;
+      }
+      return payment; 
+    });
+    travelRef.update({payments: payments});
+    res.json({payments: payments});
+  });
+};
