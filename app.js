@@ -6,9 +6,10 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
-var travels = require('./routes/travels');
 var http = require('http');
 var path = require('path');
+var travels = require('./routes/travels');
+var events = require('./routes/events');
 
 var app = express();
 
@@ -36,6 +37,7 @@ app.get('/travels', travels.list);
 app.post('/travels', travels.create);
 app.get('/travels/:id', travels.info);
 app.get('/travels/:id/events', travels.listEvents);
+app.get('/events/:id', events.info);
 
 
 //app.get('/users', user.list);
