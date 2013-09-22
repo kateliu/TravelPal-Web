@@ -6,28 +6,20 @@ var firebaseRootRef = new Firebase('https://travelpal.firebaseio.com/travels');
 
 exports.create = function (req, res) {
   var newTravel = req.body;
-  var id = firebaseRootRef.push(newTravel).name();
-  res.json({id: id});
+  var userID = newTravel.user;
+  newTravel.users = [userID];
+  delete newTravel["user"];
+  var travelID = firebaseRootRef.push(newTravel).name();
+
+  var travelRef = new Firebase(firebaseRootRef.child(travelID).toString());
+  travelRef.once("value", function( snapshot ) {
+    res.json( { travelID: travelID, content: snapshot.val()});
+  });
 };
 
 exports.list = function (req, res) {
-  var all = [];
   firebaseRootRef.once("value", function(snapshot){ 
-    all.push(snapshot.val());
-    //res.json({params: req.params.id}); 
-    res.json(all);
-  });
-
-};
-
-exports.listMyTravels = function( req, res) {
-  var userID = req.params.id;
-  firebaseRootRef.once("value", function( snapshot ) {
-    var myTravels = _und.filter(snapshot.val(), function(travel) {
-      return userID in travel.users;
-    }); 
-    var myTravels = _und.sortBy(myTravels, function(travel) { return travel.time[0]});
-    res.json(myTravels);  
+    res.json(snapshot.val());
   });
 };
 
@@ -55,5 +47,10 @@ exports.listEvents = function (req, res) {
       res.json(snapshot.val().events);
     } 
   });
+};
+
+exports.createEvent = function (req, res ) {
+  //var travelID = 
+
 };
 

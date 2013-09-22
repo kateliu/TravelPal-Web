@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+var users = require('./routes/users');
 var http = require('http');
 var path = require('path');
 var travels = require('./routes/travels');
@@ -32,7 +32,9 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/mytravels/:id', travels.listMyTravels);
+app.get('/users/:id', users.listTravels);
+app.get('/users/:id/open', users.getOpenTravel);
+
 app.get('/travels', travels.list);
 app.post('/travels', travels.create);
 app.get('/travels/:id', travels.info);
