@@ -10,7 +10,7 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#/">TravelName</a></li>
+        <li class="active"><a href="#/travel/{{travelId}}">{{travel.description}}</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -18,7 +18,7 @@
 
 <div class="container">
   <div class="page-header">
-    <h1>Travel Name <small>Subtext</small> </h1>
+    <h1>{{travel.description}} <small> @ {{travel.time[0] | date:'mediumDate'}} </small> </h1>
   </div>
   <h3></h3> <p></p>
   <div class="row content-block" style="height: 256px;">
@@ -27,10 +27,11 @@
 
   <h4>Travelers</h4>
   <div class="row content-block">
-    <div class="col-md-2">.col-md-2</div>
-    <div class="col-md-2">.col-md-2</div>
-    <div class="col-md-2">.col-md-2</div>
-    <div class="col-md-2">.col-md-2</div>
+    <div class="col-md-2" ng-repeat="(userId, dummy) in travel.users">
+      <img class="user-img img-thumbnail" ng-src="{{users[userId].imageUrl}}"
+           title="{{users[userId].name}}"
+           alt="{{users[userId].name}}">
+    </div>
   </div>
 
   <h3>Events</h3>
@@ -45,14 +46,14 @@
 </div>
 
 <div>
-  <h1>{{travel.description}}</h1>
+<!--   <h1>{{travel.description}}</h1>
   <div>
     From <span>{{travel.time[0] | date:'medium'}}</span>
   </div>
   <div>
     To <span>{{travel.time[1] | date:'medium'}}</span>
-  </div>
-
+  </div> -->
+<!--
   <h2>Participants</h2>
   <ul>
     <li ng-repeat="(userId, dummy) in travel.users">
@@ -60,7 +61,7 @@
            title="{{users[userId].name}}"
            alt="{{users[userId].name}}">
     </li>
-  </ul>
+  </ul> -->
 
   <h2>Events</h2>
   <div ng-repeat="event in travel.events">

@@ -20,3 +20,8 @@ a {
 .content-block:hover {
   box-shadow: 0 0 6px 1px #ccc;
 }
+
+.user-img {
+  width: 100%;
+  margin: 6px;
+}
