@@ -2,7 +2,7 @@
 //Setup for firebase
 var Firebase = require('firebase');
 var firebaseRootRef = new Firebase('https://travelpal.firebaseio.com/travels');
-
+var _und = require("underscore");
 exports.create = function (req, res) {
   var newTravel = req.body;
   var id = firebaseRootRef.push(newTravel).name();
@@ -18,6 +18,18 @@ exports.list = function (req, res) {
   });
 
 };
+
+exports.listMyTravels = function( req, res) {
+  var userID = req.params.id;
+  firebaseRootRef.once("value", function( snapshot ) {
+    var myTravels = _und.filter(snapshot.val(), function(travel) {
+      return userID in travel.users;
+    }); 
+    var myTravels = _und.sortBy(myTravels, function(travel) { return travel.time[0]});
+    res.json(myTravels);  
+  });
+};
+
 exports.info = function (req, res ) {
   var travelID = req.params.id;
   var travelRef = new Firebase(firebaseRootRef.child(travelID).toString());

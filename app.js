@@ -9,6 +9,7 @@ var user = require('./routes/user');
 var travels = require('./routes/travels');
 var http = require('http');
 var path = require('path');
+
 var app = express();
 
 // all environments
@@ -30,10 +31,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/mytravels/:id', travels.listMyTravels);
 app.get('/travels', travels.list);
 app.post('/travels', travels.create);
 app.get('/travels/:id', travels.info);
 app.get('/travels/:id/events', travels.listEvents);
+
 
 //app.get('/users', user.list);
 
