@@ -78,7 +78,7 @@ createEvent({
   photos: [],
   expenses: [
     {
-      'description': '',
+      'description': 'Lunch Cost',
       'cost': 84.9,
       'paidBy': userIds[1],
       'payers': [userIds[0], userIds[1], userIds[2], userIds[3], userIds[4], userIds[5]]
@@ -213,7 +213,7 @@ createTravel({
     new Date(2013, 8, 10, 9, 30).getTime(),
     new Date(2013, 8, 10, 22, 30).getTime()
   ],
-  events: [eventIds[0], eventIds[1]]
+  events: [eventIds[0], eventIds[1], eventIds[2]]
 });
 
 createTravel({
@@ -222,7 +222,7 @@ createTravel({
     new Date(2013, 5, 15, 8, 0).getTime(),
     new Date(2013, 5, 20, 18, 0).getTime()
   ],
-  events: [eventIds[2], eventIds[3]]
+  events: [eventIds[3], eventIds[4]]
 });
 
 var deleteAllData = function(callback) {
