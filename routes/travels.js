@@ -9,7 +9,8 @@ exports.create = function (req, res) {
   var userName = newTravel.user;
   var currentTimeStamp = new Date().getTime();
   newTravel.time = [currentTimeStamp];
-  newTravel.users = [userName];
+  newTravel.users = {}; 
+  newTravel.users[userName] =  true ;
   newTravel.events = {};
   delete newTravel["user"];
   var travelID = firebaseRootRef.push(newTravel).name();
