@@ -64,7 +64,7 @@
   </ul> -->
 
   <h2>Events</h2>
-  <div ng-repeat="event in travel.events">
+  <div ng-repeat="(eventId, dummy) in travel.events" ng-init="event=events[eventId]">
     <h3>{{event.description}}</h3>
     <div>
       <div>
