@@ -2,6 +2,7 @@
 
 travelpalApp.service('firebaseRef', function() {
   var baseUrl = 'https://travelpal.firebaseio.com';
+  var eventsUrl = baseUrl + '/events';
   var travelsUrl = baseUrl + '/travels';
   var usersUrl = baseUrl + '/users';
 
@@ -9,6 +10,7 @@ travelpalApp.service('firebaseRef', function() {
     return new Firebase(url);
   };
 
+  this.events = newRef(eventsUrl);
   this.travels = newRef(travelsUrl);
   this.users = newRef(usersUrl);
 
