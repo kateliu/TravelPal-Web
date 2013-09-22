@@ -5,7 +5,11 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #c50028;
+}
+
+a:hover {
+  color: #a30006;
 }
 
 .main-container {
@@ -137,6 +141,10 @@ a {
   width: 512px;
   opacity: 0.8;
   margin: 96px auto 0 auto;
+}
+
+#search-box:focus {
+  border-color: #C56375;
 }
 
 .travel-card a:hover {
