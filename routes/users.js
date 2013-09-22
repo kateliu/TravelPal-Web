@@ -48,10 +48,10 @@ exports.getOpenTravel = function( req, res ) {
 
       var openTravel = _und.find(travels , function(travel, travelID) {
         travel.id = travelID; 
-        travel.events = _und.map(travels, function(evt, eventID) {
-          return eventID;  
-        });
         return ('time' in travel && (travel.time.length == 1 || travel.time[2] >= currentTimestamp));  
+      });
+      openTravel.events = _und.map(openTravel.events, function(evt, eventID) {
+        return eventID;  
       });
       res.json(openTravel);
     });
