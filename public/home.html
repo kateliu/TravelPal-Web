@@ -21,9 +21,73 @@
       <h1>TravelPal</h1>
       <p>The best paycheck and expereince sharing solution for travelers.</p>
     </div>
+    <input type="text" id="search-box" ng-click="scrollDown()" class="form-control input-lg" placeholder="Search for Some Travels">
+  </div>
 
-    <input type="text" id="search-box" class="form-control" placeholder="Text input">
-
+  <div class="row content-block travel-card" ng-repeat="(travelId, travel) in travels">
+    <a href="#/travel/{{travelId}}"> <div class="col-md-12">
+      <h3>{{travel.description}}
+        <small> {{travel.time[0] | date:'mediumDate'}} </small>
+        <span class="label label-default">0 USD</span>
+      </h3>
+      <img class="event-user-img" ng-repeat="(userId, dummy) in travel.users" ng-src="{{users[userId].imageUrl}}">
+    </div></a>
   </div>
 
 </div>
+
+
+<div ng-repeat="travel in travels">
+  <h1>{{travel.description}}</h1>
+  <div>
+    From <span>{{travel.time[0] | date:'medium'}}</span>
+  </div>
+  <div>
+    To <span>{{travel.time[1] | date:'medium'}}</span>
+  </div>
+
+  <h2>Participants</h2>
+  <ul>
+    <li ng-repeat="(userId, dummy) in travel.users">
+      <img ng-src="{{users[userId].imageUrl}}">
+    </li>
+  </ul>
+
+  <h2>Events</h2>
+  <div ng-repeat="(eventId, dummy) in travel.events" ng-init="event=events[eventId]">
+    <h3>{{event.description}}</h3>
+    <div>
+      <div>
+        At {{event.location}}
+      </div>
+
+      <div>
+        From <span>{{event.time[0] | date:'medium'}}</span>
+      </div>
+      <div>
+        To <span>{{event.time[1] | date:'medium'}}</span>
+      </div>
+
+      <h4>Participants</h4>
+      <ul>
+        <li ng-repeat="(userId, dummy) in event.users">
+          <img ng-src="{{users[userId].imageUrl}}">
+        </li>
+      </ul>
+
+      <h4>Photos</h4>
+      <img ng-repeat="(dummy, imageUrl) in event.photos" ng-src="{{imageUrl}}">
+
+      <h4>Expenses</h4>
+      <div ng-repeat="expense in event.expenses">
+        <h5>{{expense.description || "No title"}}</h5>
+        <ul>
+          <li ng-repeat="(userId, payerInfo) in expense.payers">
+            {{userId}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
