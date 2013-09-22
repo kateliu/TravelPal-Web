@@ -35,12 +35,14 @@ travelpalApp.controller('eventCtrl', ['$scope', '$routeParams', 'angularFire', '
       return totalExpense;
     };
 
+    $scope.getUsersCount = function(){
+      var count = 0;
+      for(var user in $scope.event.users){ count++; }
+      return count;
+    }
 
     $scope.effect = function(e, effect){
-      //var elem = angular.element(e.srcElement);
-      //console.log(e.srcElement);
       $(e.srcElement).parent().parent().find('img').toggleClass(effect);
-      //elem.css('background', 'blue');
     };
 
 

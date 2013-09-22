@@ -64,5 +64,15 @@ travelpalApp.controller('travelCtrl', ['$scope', '$routeParams', 'angularFire', 
       return totalExpense;
     };
 
+    $scope.getUsersCount = function(eventId){
+      var count = 0;
+      if(eventId){
+        for(var user in $scope.events[eventId].users){ count++; }
+      } else{
+        for(var user in $scope.travel.users){ count++; }
+      }
+      return count;
+    }
+
   }
 ]);

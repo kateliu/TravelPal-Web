@@ -28,8 +28,8 @@
     <a href="#/travel/{{travelId}}"> <div class="col-md-12">
       <h3>{{travel.description}}
         <small> {{travel.time[0] | date:'mediumDate'}} </small>
-        <span class="label label-default">{{getPerPersonExpense(travelId) | number:1}} per Person</span>
-        <span class="label label-default">{{getTravelExpense(travelId)}} in Total</span>
+        <span class="label label-default">{{getPerPersonExpense(travelId) | number:1}} USD per Person</span>
+        <span class="label label-default">{{getTravelExpense(travelId)}} USD in Total</span>
       </h3>
       <img class="event-user-img" ng-repeat="(userId, dummy) in travel.users" ng-src="{{users[userId].imageUrl}}">
     </div></a>
