@@ -93,7 +93,7 @@ a {
 .photo-saturate { -webkit-filter : saturate(2.0); }
 
 .expense-cards {
-  margin: 0 10px;
+  margin: 0 0 16px 16px;
 }
 
 
